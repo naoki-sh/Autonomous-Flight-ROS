@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node pkg="action_controller" type="action_controller" name="action_controller" output="screen">
+	  <remap from="/cmd_vel" to="/mavros/setpoint_velocity/cmd_vel"/>
+  </node>
+
+</launch>

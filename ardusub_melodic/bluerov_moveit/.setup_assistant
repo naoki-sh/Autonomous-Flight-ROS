@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: bluerov_ros_playground
+    relative_path: urdfs/BlueRov2.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/BlueRov2.srdf
+  CONFIG:
+    author_name: Naoki Shirakura
+    author_email: shirakura.naoki@aist.go.jp
+    generated_timestamp: 1632162443
