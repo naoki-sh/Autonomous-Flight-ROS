@@ -8,4 +8,4 @@ moveit_setup_assistant_config:
   CONFIG:
     author_name: Naoki Shirakura
     author_email: shirakura.naoki@aist.go.jp
-    generated_timestamp: 1632162443
+    generated_timestamp: 1632214586

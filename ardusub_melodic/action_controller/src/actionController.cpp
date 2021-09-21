@@ -56,7 +56,7 @@ private:
 
 			empty.header.seq = ros::Time::now().toSec();
 			empty.header.stamp = ros::Time::now();
-			empty.header.frame_id = "odometry";
+			empty.header.frame_id = "map";
 			pub_topic.publish(empty);
 
 			// Marks the current goal as canceled.
@@ -75,7 +75,7 @@ private:
 			}
 			empty.header.seq = ros::Time::now().toSec();
 			empty.header.stamp = ros::Time::now();
-			empty.header.frame_id = "odometry";
+			empty.header.frame_id = "map";
 			pub_topic.publish(empty);
 
 			// Marks the current goal as canceled.
@@ -121,7 +121,7 @@ private:
 				}
 				empty.header.seq = ros::Time::now().toSec();
 				empty.header.stamp = ros::Time::now();
-				empty.header.frame_id = "odometry";
+				empty.header.frame_id = "map";
 				pub_topic.publish(empty);
 				//aggiorno start position
 				if(eseguito){
@@ -136,14 +136,15 @@ private:
 
 	}
 	bool publishTranslationComand(geometry_msgs::Transform_<std::allocator<void> > punto, bool anyway){
-		//creazione comando di traslazione
-		cmd.twist.linear.x=punto.translation.x-lastPosition.translation.x;
-		cmd.twist.linear.y=punto.translation.y-lastPosition.translation.y;
+		//creazione comando di traslazione 
+		// Note: rotate 90 deg for mavros setpoint message
+		cmd.twist.linear.x=-(punto.translation.y-lastPosition.translation.y);
+		cmd.twist.linear.y=punto.translation.x-lastPosition.translation.x;
 		cmd.twist.linear.z=punto.translation.z-lastPosition.translation.z;
 		cmd.twist.angular.x=cmd.twist.angular.y=cmd.twist.angular.z=0;
 		cmd.header.seq = ros::Time::now().toSec();
 		cmd.header.stamp = ros::Time::now();
-		cmd.header.frame_id = "odometry";
+		cmd.header.frame_id = "map";
 		if(anyway || cmd.twist.linear.x>=0.5 || cmd.twist.linear.y>=0.5 || cmd.twist.linear.z>=0.5){
 			printPositionInfo();
 			printCmdInfo();
